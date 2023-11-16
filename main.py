@@ -1,7 +1,8 @@
 # import dash
-from dash import Dash, dcc, Input, Output
+from dash import Dash, html, dcc, Input, Output
 import dash_mantine_components as dmc
 from dash_iconify import DashIconify
+import dash_bootstrap_components as dbc
 
 app = Dash(
     __name__,
@@ -82,7 +83,21 @@ app.layout = dmc.Center(
                                     ),
                                     href="/",
                                 ),
-                                dmc.Button("Login", id="login-button", radius="md", color="indigo"),
+                                # dmc.Button("Login", id="login-button", radius="md", color="indigo"),
+                                html.A(
+                                    "Login",
+                                    href="http://127.0.0.1:7500",
+                                    style={
+                                        'display': 'inline-block',
+                                        'text-align': 'center',
+                                        'padding': '10px 20px',
+                                        'background-color': '#4c6ef5',
+                                        'color': 'white',
+                                        'text-decoration': 'none',
+                                        'border-radius': '5px',
+                                        'font-size': '16px'
+                                    }
+                                )
                             ],
                             grow=True,
                             mt="1.5rem",
@@ -100,18 +115,18 @@ app.layout = dmc.Center(
             style={"width": "420px"},
         ),
         
-        dcc.Location(id='redirect-app', refresh=False)
+        # dcc.Location(id='redirect-app', refresh=False)
     ],
 )
 
-@app.callback(
-    Output('redirect-app', 'href'),
-    [Input('login-button', 'n_clicks')]
-)
-def redirect(n_clicks):
-    if n_clicks:
-        return "http://127.0.0.1:8000"  # Replace with the URL of your second Dash app
-    return ""
+# @app.callback(
+#     Output('redirect-app', 'href'),
+#     [Input('login-button', 'n_clicks')]
+# )
+# def redirect(n_clicks):
+#     if n_clicks:
+#         return "http://127.0.0.1:8000"  # Replace with the URL of your second Dash app
+#     return ""
 
 
 if __name__ == "__main__":
